@@ -7,7 +7,7 @@ This is a REST API for managing users and their data, built using the Echo frame
 - User registration and authentication
 - Admin functionality for user management (create, update, delete, and retrieve users)
 - Secure user data handling
-- Swagger API documentation for easy exploration of endpoints (http://host:port/swagger/\*)
+- Swagger API documentation for easy exploration of endpoints (http://host:port/swagger/*)
 
 docker-compose build:
 
