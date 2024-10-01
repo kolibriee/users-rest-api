@@ -9,6 +9,8 @@ This is a REST API for managing users and their data, built using the Echo frame
 - Secure user data handling
 - Swagger API documentation for easy exploration of endpoints (http://host:port/swagger/*)
 
+## Build
+
 docker-compose build:
 
 ```
