@@ -5,7 +5,7 @@ This is a REST API for managing users and their data, built using the Echo frame
 ## Features
 
 - User registration and authentication
-- Admin functionality for user management (create, update, delete, and retrieve users)
+- Admin functionality for user management (create, update, delete, and delete users)
 - Secure user data handling
 - Swagger API documentation for easy exploration of endpoints (http://host:port/swagger/*)
 
