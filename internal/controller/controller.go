@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	v1 "github.com/kolibriee/users-rest-api/internal/controller/v1"
+	v1 "github.com/kolibriee/users-rest-api/internal/controller/http/v1"
 	"github.com/kolibriee/users-rest-api/internal/service"
 )
 

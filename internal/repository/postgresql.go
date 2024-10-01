@@ -13,12 +13,8 @@ import (
 )
 
 const (
-	usersTable      = "users"
-	todoListsTable  = "todo_lists"
-	todoItemsTable  = "todo_items"
-	usersListsTable = "users_lists"
-	listsItemsTable = "lists_items"
-	sessionsTable   = "sessions"
+	usersTable    = "users"
+	sessionsTable = "sessions"
 )
 
 func NewPostgresDB(cfg *config.Postgres) (*bun.DB, error) {
