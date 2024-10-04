@@ -9,11 +9,20 @@ services:
       - "${DB_PORT}:${DB_PORT}"
     volumes:
       - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USERNAME}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   migrate:
     image: migrate/migrate
-    entrypoint: >
-      sh -c "migrate -path /migrations/postgresql -database 'postgres://$DB_USERNAME:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_DBNAME?sslmode=disable' up"
+    command:
+      [
+        "-path", "/migrations/postgresql",
+        "-database", "postgres://$DB_USERNAME:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_DBNAME?sslmode=disable",
+        "up"
+      ]
     volumes:
       - ./migrations:/migrations
     environment:
@@ -23,11 +32,12 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DBNAME: ${DB_DBNAME}
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   app:
     build:
-      context: . 
+      context: .
       dockerfile: ./Dockerfile
     ports:
       - "8080:8080"
@@ -38,8 +48,10 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DBNAME: ${DB_DBNAME}
     depends_on:
-      - db
-      - migrate
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
 
 volumes:
   db_data:
