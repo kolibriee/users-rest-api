@@ -37,6 +37,11 @@ func Run(configPath string, configName string) {
 		logrus.Fatalf("failed to initialize db: %s", err.Error())
 	}
 
+	// Мигрируем базу данных
+	if err := Migrate(&cfg.Postgres); err != nil {
+		logrus.Fatalf("failed to migrate db: %s", err.Error())
+	}
+
 	// Инициализируем пользователя-администратора
 	if err := initAdmin(db); err != nil {
 		logrus.Fatalf("failed to init admin: %s", err.Error())
