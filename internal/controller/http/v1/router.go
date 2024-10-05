@@ -12,7 +12,7 @@ import (
 func (h *Handler) InitRouter() http.Handler {
 	router := echo.New()
 	router.Use(middleware.Logger())
-	router.GET("/swagger/*", echoSwagger.WrapHandler)
+	router.GET("/swagger*", echoSwagger.WrapHandler)
 	admin := router.Group("/admin", h.adminIdentity)
 	{
 		users := admin.Group("/users")

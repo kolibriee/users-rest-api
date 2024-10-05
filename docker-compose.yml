@@ -15,26 +15,6 @@ services:
       timeout: 3s
       retries: 5
 
-  migrate:
-    image: migrate/migrate
-    command:
-      [
-        "-path", "/migrations/postgresql",
-        "-database", "postgres://$DB_USERNAME:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_DBNAME?sslmode=disable",
-        "up"
-      ]
-    volumes:
-      - ./migrations:/migrations
-    environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_DBNAME: ${DB_DBNAME}
-    depends_on:
-      db:
-        condition: service_healthy
-
   app:
     build:
       context: .
@@ -50,8 +30,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      migrate:
-        condition: service_completed_successfully
 
 volumes:
   db_data:
