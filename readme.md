@@ -33,7 +33,7 @@ DB migration: https://github.com/golang-migrate/migrate
 
 ```
 DB_PASSWORD=
-DB_HOST=users-rest-api-db-1 (or localhost if u dont use docker)
+DB_HOST=
 DB_PORT=
 DB_USERNAME=
 DB_DBNAME=
