@@ -3,7 +3,9 @@ package app
 import (
 	"context"
 	"errors"
+	"os"
 
+	"github.com/kolibriee/users-rest-api/docs"
 	"github.com/sirupsen/logrus"
 	"github.com/uptrace/bun"
 
@@ -47,4 +49,13 @@ func initAdmin(db *bun.DB) error {
 
 	logrus.Info("Admin created")
 	return nil
+}
+
+func initSwagger() {
+	host := os.Getenv("SWAGGER_HOST")
+
+	if host == "" {
+		host = "localhost:8080"
+	}
+	docs.SwaggerInfo.Host = host
 }

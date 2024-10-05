@@ -46,6 +46,8 @@ func Run(configPath string, configName string) {
 	if err := initAdmin(db); err != nil {
 		logrus.Fatalf("failed to init admin: %s", err.Error())
 	}
+	// Инициализируем Swagger
+	initSwagger()
 
 	// Создаем репозитории, сервисы и контроллер
 	repository := repository.NewRepository(db)
