@@ -1,4 +1,4 @@
-basePath: /
+basePath:
 definitions:
   bun_entities.User:
     properties:
@@ -30,11 +30,11 @@ definitions:
       username:
         type: string
     required:
-    - city
-    - name
-    - password
-    - role
-    - username
+      - city
+      - name
+      - password
+      - role
+      - username
     type: object
   entities.SignInInput:
     properties:
@@ -43,8 +43,8 @@ definitions:
       username:
         type: string
     required:
-    - password
-    - username
+      - password
+      - username
     type: object
   entities.SignUpInput:
     properties:
@@ -57,10 +57,10 @@ definitions:
       username:
         type: string
     required:
-    - city
-    - name
-    - password
-    - username
+      - city
+      - name
+      - password
+      - username
     type: object
   entities.UserUpdateInput:
     properties:
@@ -91,40 +91,40 @@ paths:
     get:
       description: Get list of all users (admin only)
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/bun_entities.User'
+              $ref: "#/definitions/bun_entities.User"
             type: array
         "403":
           description: access denied
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Get all users
       tags:
-      - admin
+        - admin
     post:
       consumes:
-      - application/json
+        - application/json
       description: Create a new user (admin only)
       parameters:
-      - description: User data
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/entities.CreateUserInput'
+        - description: User data
+          in: body
+          name: user
+          required: true
+          schema:
+            $ref: "#/definitions/entities.CreateUserInput"
       produces:
-      - application/json
+        - application/json
       responses:
         "201":
           description: user created
@@ -134,230 +134,230 @@ paths:
         "400":
           description: invalid request
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Create a new user
       tags:
-      - admin
+        - admin
   /admin/users/{id}:
     delete:
       description: Delete a user by their ID (admin or user themselves)
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: ok
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "400":
           description: invalid user id
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "403":
           description: access denied
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Delete a user
       tags:
-      - admin
+        - admin
     get:
       description: Get a user by their ID (admin or user themselves)
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/bun_entities.User'
+            $ref: "#/definitions/bun_entities.User"
         "400":
           description: invalid user id
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "403":
           description: access denied
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Get user by ID
       tags:
-      - admin
+        - admin
     put:
       consumes:
-      - application/json
+        - application/json
       description: Update user information (admin or user themselves)
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Updated user data
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/entities.UserUpdateInput'
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Updated user data
+          in: body
+          name: user
+          required: true
+          schema:
+            $ref: "#/definitions/entities.UserUpdateInput"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: ok
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "400":
           description: invalid request
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "403":
           description: access denied
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Update a user
       tags:
-      - admin
+        - admin
   /api/users/{id}:
     delete:
       description: Delete a user by their ID (admin or user themselves)
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: ok
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "400":
           description: invalid user id
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "403":
           description: access denied
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Delete a user
       tags:
-      - users
+        - users
     get:
       description: Get a user by their ID (admin or user themselves)
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/bun_entities.User'
+            $ref: "#/definitions/bun_entities.User"
         "400":
           description: invalid user id
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "403":
           description: access denied
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Get user by ID
       tags:
-      - users
+        - users
     put:
       consumes:
-      - application/json
+        - application/json
       description: Update user information (admin or user themselves)
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Updated user data
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/entities.UserUpdateInput'
+        - description: User ID
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Updated user data
+          in: body
+          name: user
+          required: true
+          schema:
+            $ref: "#/definitions/entities.UserUpdateInput"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: ok
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "400":
           description: invalid request
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "403":
           description: access denied
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
         "500":
           description: internal server error
           schema:
-            $ref: '#/definitions/v1.statusResponse'
+            $ref: "#/definitions/v1.statusResponse"
       security:
-      - ApiKeyAuth: []
+        - ApiKeyAuth: []
       summary: Update a user
       tags:
-      - users
+        - users
   /auth/refresh:
     get:
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -374,20 +374,20 @@ paths:
             type: string
       summary: Refresh access token
       tags:
-      - auth
+        - auth
   /auth/sign-in:
     post:
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - description: SignIn input
-        in: body
-        name: input
-        required: true
-        schema:
-          $ref: '#/definitions/entities.SignInInput'
+        - description: SignIn input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: "#/definitions/entities.SignInInput"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -404,20 +404,20 @@ paths:
             type: string
       summary: Login user and get tokens
       tags:
-      - auth
+        - auth
   /auth/sign-up:
     post:
       consumes:
-      - application/json
+        - application/json
       parameters:
-      - description: SignUp input
-        in: body
-        name: input
-        required: true
-        schema:
-          $ref: '#/definitions/entities.SignUpInput'
+        - description: SignUp input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: "#/definitions/entities.SignUpInput"
       produces:
-      - application/json
+        - application/json
       responses:
         "200":
           description: OK
@@ -434,7 +434,7 @@ paths:
             type: string
       summary: Register a new user
       tags:
-      - auth
+        - auth
 securityDefinitions:
   ApiKeyAuth:
     in: header
