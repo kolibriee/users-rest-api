@@ -27,6 +27,7 @@ services:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_DBNAME: ${DB_DBNAME}
+      DB_SSLMODE: ${DB_SSLMODE}
     depends_on:
       db:
         condition: service_healthy
