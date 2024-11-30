@@ -2,6 +2,7 @@ package v1
 
 import (
 	"net/http"
+	"os"
 
 	_ "github.com/kolibriee/users-rest-api/docs"
 	"github.com/labstack/echo/v4"
@@ -12,10 +13,10 @@ import (
 func (h *Handler) InitRouter() http.Handler {
 	router := echo.New()
 	router.Use(middleware.Logger())
-	
+
 	// Добавляем CORS middleware
 	router.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins:     []string{"http://localhost:5173", "https://zoological-consideration-production.up.railway.app"},
+		AllowOrigins:     []string{"http://localhost:5173", os.Getenv("FRONTEND_HOST")},
 		AllowMethods:     []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete, http.MethodOptions},
 		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
 		AllowCredentials: true,
