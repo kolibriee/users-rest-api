@@ -56,6 +56,7 @@ func (r *UsersRepository) CreateUser(ctx context.Context, user entities.CreateUs
 		Role:         user.Role,
 		Name:         user.Name,
 		Username:     user.Username,
+		Email:        user.Email,
 		PasswordHash: user.Password,
 		City:         user.City,
 	}
@@ -107,6 +108,10 @@ func (r *UsersRepository) UpdateUser(ctx context.Context, userID int, user entit
 	if user.Password != nil {
 		updatedUser.PasswordHash = *user.Password
 		columnsToUpdate = append(columnsToUpdate, "password_hash")
+	}
+	if user.Email != nil {
+		updatedUser.Email = *user.Email
+		columnsToUpdate = append(columnsToUpdate, "email")
 	}
 	if user.City != nil {
 		updatedUser.City = *user.City

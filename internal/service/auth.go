@@ -27,8 +27,8 @@ func NewAuthorizationService(repo repository.Authorization) *AuthorizationServic
 
 // SignUp регистрирует нового пользователя и возвращает его ID.
 func (s *AuthorizationService) SignUp(ctx context.Context, user entities.SignUpInput) (int, error) {
-	user.Password = auth.GeneratePasswordHash(user.Password) // Хешируем пароль
-	return s.repo.CreateUser(ctx, user)
+	user.Password = auth.GeneratePasswordHash(user.Password)
+    return s.repo.CreateUser(ctx, user)
 }
 
 // SignIn выполняет вход пользователя, возвращая access token и refresh token.

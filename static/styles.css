@@ -1,0 +1,35 @@
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.btn-action {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.toast-container {
+    z-index: 1050;
+}
+
+.user-row:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .table-responsive {
+        margin: 0;
+    }
+    
+    .btn {
+        padding: 0.375rem 0.75rem;
+    }
+}

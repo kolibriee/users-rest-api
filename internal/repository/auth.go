@@ -42,6 +42,7 @@ func (r *AuthRepository) CreateUser(ctx context.Context, user entities.SignUpInp
 		Role:         "user", // Роль по умолчанию
 		Name:         user.Name,
 		Username:     user.Username,
+		Email:        user.Email,
 		PasswordHash: user.Password,
 		City:         user.City,
 	}

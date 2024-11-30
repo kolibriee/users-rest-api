@@ -17,6 +17,7 @@ type CreateUserInput struct {
 	Name     string `json:"name" validate:"required"`
 	Username string `json:"username" validate:"required"`
 	Password string `json:"password" validate:"required"`
+	Email    string `json:"email" validate:"required,email"`
 	City     string `json:"city" validate:"required"`
 }
 
@@ -24,6 +25,7 @@ type SignUpInput struct {
 	Name     string `json:"name" validate:"required"`
 	Username string `json:"username" validate:"required"`
 	Password string `json:"password" validate:"required"`
+	Email    string `json:"email" validate:"required,email"`
 	City     string `json:"city" validate:"required"`
 }
 
@@ -36,6 +38,7 @@ type UserUpdateInput struct {
 	Name     *string `json:"name"`
 	Username *string `json:"username"`
 	Password *string `json:"password"`
+	Email    *string `json:"email"`
 	City     *string `json:"city"`
 	Role     *string `json:"role"`
 }
@@ -60,16 +63,24 @@ func (input *SignInInput) ValidateSignInInput() error {
 
 func (u UserUpdateInput) ValidateUserUpdate(role string) error {
 	// Проверяем, что хотя бы одно поле для обновления не является nil
-	if u.Name == nil && u.Username == nil && u.Password == nil && u.City == nil && u.Role == nil {
-		return errors.New("update must have at least one of: name, username, password, city, or role")
+	if u.Name == nil && u.Username == nil && u.Password == nil && u.Email == nil && u.City == nil && u.Role == nil {
+		return errors.New("update must have at least one of: name, username, password, email, city, or role")
 	}
 
 	// Проверяем, что поля не пустые (если они не nil)
-	if u.Password != nil && *u.Password == "" {
-		return errors.New("password must not be empty")
+	if u.Password != nil {
+		if *u.Password == "" {
+			return errors.New("password must not be empty")
+		}
+		if len(*u.Password) < 6 {
+			return errors.New("password must be at least 6 characters long")
+		}
 	}
 	if u.Username != nil && *u.Username == "" {
 		return errors.New("username must not be empty")
+	}
+	if u.Email != nil && *u.Email == "" {
+		return errors.New("email must not be empty")
 	}
 
 	// Только админ может обновлять роль

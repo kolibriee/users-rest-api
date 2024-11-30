@@ -12,6 +12,15 @@ import (
 func (h *Handler) InitRouter() http.Handler {
 	router := echo.New()
 	router.Use(middleware.Logger())
+	
+	// Добавляем CORS middleware
+	router.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins:     []string{"http://localhost:5173"},
+		AllowMethods:     []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete, http.MethodOptions},
+		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
+		AllowCredentials: true,
+	}))
+
 	router.GET("/swagger*", echoSwagger.WrapHandler)
 	admin := router.Group("/admin", h.adminIdentity)
 	{
